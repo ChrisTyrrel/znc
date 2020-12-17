@@ -82,6 +82,7 @@ CUser::CUser(const CString& sUsername)
       m_bMultiClients(true),
       m_bDenyLoadMod(false),
       m_bAdmin(false),
+      m_bDenySetOptions(false),
       m_bDenySetBindHost(false),
       m_bAutoClearChanBuffer(true),
       m_bAutoClearQueryBuffer(true),
@@ -167,6 +168,7 @@ bool CUser::ParseConfig(CConfig* pConfig, CString& sError) {
         {"multiclients", &CUser::SetMultiClients},
         {"denyloadmod", &CUser::SetDenyLoadMod},
         {"admin", &CUser::SetAdmin},
+        {"denysetoptions", &CUser::SetDenySetOptions},
         {"denysetbindhost", &CUser::SetDenySetBindHost},
         {"denysetvhost", &CUser::SetDenySetBindHost},
         {"appendtimestamp", &CUser::SetTimestampAppend},
@@ -802,6 +804,7 @@ bool CUser::Clone(const CUser& User, CString& sErrorRet, bool bCloneNetworks) {
     SetMultiClients(User.MultiClients());
     SetDenyLoadMod(User.DenyLoadMod());
     SetAdmin(User.IsAdmin());
+    SetDenySetOptions(User.DenySetOptions();
     SetDenySetBindHost(User.DenySetBindHost());
     SetAuthOnlyViaModule(User.AuthOnlyViaModule());
     SetTimestampAppend(User.GetTimestampAppend());
@@ -967,6 +970,7 @@ CConfig CUser::ToConfig() const {
     config.AddKeyValuePair("MultiClients", CString(MultiClients()));
     config.AddKeyValuePair("DenyLoadMod", CString(DenyLoadMod()));
     config.AddKeyValuePair("Admin", CString(IsAdmin()));
+    config.AddKeyValuePair("DenySetOptions", CString(DenySetOptions()));
     config.AddKeyValuePair("DenySetBindHost", CString(DenySetBindHost()));
     config.AddKeyValuePair("TimestampFormat", GetTimestampFormat());
     config.AddKeyValuePair("AppendTimestamp", CString(GetTimestampAppend()));
@@ -1261,6 +1265,7 @@ void CUser::SetPass(const CString& s, eHashType eHash, const CString& sSalt) {
 void CUser::SetMultiClients(bool b) { m_bMultiClients = b; }
 void CUser::SetDenyLoadMod(bool b) { m_bDenyLoadMod = b; }
 void CUser::SetAdmin(bool b) { m_bAdmin = b; }
+void CUser::SetDenySetOptions(bool b) { m_bDenySetOptions = b; }
 void CUser::SetDenySetBindHost(bool b) { m_bDenySetBindHost = b; }
 void CUser::SetDefaultChanModes(const CString& s) { m_sDefaultChanModes = s; }
 void CUser::SetClientEncoding(const CString& s) {
@@ -1394,6 +1399,7 @@ CUser::eHashType CUser::GetPassHashType() const { return m_eHashType; }
 const CString& CUser::GetPassSalt() const { return m_sPassSalt; }
 bool CUser::DenyLoadMod() const { return m_bDenyLoadMod; }
 bool CUser::IsAdmin() const { return m_bAdmin; }
+bool CUser::DenySetOptions() const { return m_bDenySetOptions; }
 bool CUser::DenySetBindHost() const { return m_bDenySetBindHost; }
 bool CUser::MultiClients() const { return m_bMultiClients; }
 bool CUser::AuthOnlyViaModule() const { return m_bAuthOnlyViaModule; }

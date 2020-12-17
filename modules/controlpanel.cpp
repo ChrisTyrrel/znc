@@ -107,6 +107,7 @@ class CAdminMod : public CModule {
                 {"MaxQueryBuffers", integer},
                 {"Timezone", str},
                 {"Admin", boolean},
+                {"DenySetOptions", boolean},
                 {"AppendTimestamp", boolean},
                 {"PrependTimestamp", boolean},
                 {"AuthOnlyViaModule", boolean},
@@ -289,6 +290,8 @@ class CAdminMod : public CModule {
             PutModule("DCCBindHost = " + CString(pUser->GetDCCBindHost()));
         else if (sVar == "admin")
             PutModule("Admin = " + CString(pUser->IsAdmin()));
+        else if (sVar =="denysetoptions")
+            PutModule("DenySetOptions = " + CString(pUser->DenySetOptions()));    
         else if (sVar == "statusprefix")
             PutModule("StatusPrefix = " + pUser->GetStatusPrefix());
 #ifdef HAVE_I18N
@@ -444,6 +447,14 @@ class CAdminMod : public CModule {
             } else {
                 PutModule(t_s("Access denied!"));
             }
+        } else if (sVar =="denysetoptions") {
+            if (GetUser()->IsAdmin()) {
+                bool b = sValue.ToBool();
+                pUser->SetDenySetOptions(b);
+                PutModule("DenySetOptions = " + CString(b));
+            } else {
+                PutModule(t_s("Access denied!"));
+            }   
         } else if (sVar == "prependtimestamp") {
             bool b = sValue.ToBool();
             pUser->SetTimestampPrepend(b);

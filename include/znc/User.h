@@ -136,6 +136,7 @@ class CUser : private CCoreTranslationMixin {
     void SetMultiClients(bool b);
     void SetDenyLoadMod(bool b);
     void SetAdmin(bool b);
+    void SetDenySetOptions(bool b);
     void SetDenySetBindHost(bool b);
     bool SetStatusPrefix(const CString& s);
     void SetDefaultChanModes(const CString& s);
@@ -191,6 +192,7 @@ class CUser : private CCoreTranslationMixin {
 
     bool DenyLoadMod() const;
     bool IsAdmin() const;
+    bool DenySetOptions() const;
     bool DenySetBindHost() const;
     bool MultiClients() const;
     bool AuthOnlyViaModule() const;
@@ -253,6 +255,7 @@ class CUser : private CCoreTranslationMixin {
     bool m_bMultiClients;
     bool m_bDenyLoadMod;
     bool m_bAdmin;
+    bool m_bDenySetOptions;
     bool m_bDenySetBindHost;
     bool m_bAutoClearChanBuffer;
     bool m_bAutoClearQueryBuffer;
