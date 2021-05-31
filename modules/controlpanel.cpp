@@ -110,6 +110,7 @@ class CAdminMod : public CModule {
                 {"AppendTimestamp", boolean},
                 {"PrependTimestamp", boolean},
                 {"AuthOnlyViaModule", boolean},
+                {"ReplyViaNotice", boolean},
                 {"TimestampFormat", str},
                 {"DCCBindHost", str},
                 {"StatusPrefix", str},
@@ -284,6 +285,9 @@ class CAdminMod : public CModule {
         else if (sVar == "authonlyviamodule")
             PutModule("AuthOnlyViaModule = " +
                       CString(pUser->AuthOnlyViaModule()));
+        else if (sVar == "replyvianotice")
+            PutModule("ReplyViaNotice = " +
+                      CString(pUser->ReplyViaNotice()));              
         else if (sVar == "timestampformat")
             PutModule("TimestampFormat = " + pUser->GetTimestampFormat());
         else if (sVar == "dccbindhost")
@@ -461,6 +465,10 @@ class CAdminMod : public CModule {
             } else {
                 PutModule(t_s("Access denied!"));
             }
+        } else if (sVar == "replyvianotice") {
+            bool b = sValue.ToBool();
+            pUser->SetReplyViaNotice(b);
+            PutModule("ReplyViaNotice = " + sValue);   
         } else if (sVar == "timestampformat") {
             pUser->SetTimestampFormat(sValue);
             PutModule("TimestampFormat = " + sValue);

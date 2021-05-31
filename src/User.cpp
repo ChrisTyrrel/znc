@@ -90,6 +90,7 @@ CUser::CUser(const CString& sUsername)
       m_bPrependTimestamp(true),
       m_bAuthOnlyViaModule(false),
       m_pUserTimer(nullptr),
+      m_bReplyViaNotice(false),
       m_vIRCNetworks(),
       m_vClients(),
       m_ssAllowedHosts(),
@@ -172,6 +173,7 @@ bool CUser::ParseConfig(CConfig* pConfig, CString& sError) {
         {"appendtimestamp", &CUser::SetTimestampAppend},
         {"prependtimestamp", &CUser::SetTimestampPrepend},
         {"authonlyviamodule", &CUser::SetAuthOnlyViaModule},
+        {"replyvianotice", &CUser::SetReplyViaNotice},
     };
 
     for (const auto& Option : StringOptions) {
