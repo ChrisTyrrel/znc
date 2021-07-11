@@ -975,6 +975,7 @@ CConfig CUser::ToConfig() const {
     config.AddKeyValuePair("AppendTimestamp", CString(GetTimestampAppend()));
     config.AddKeyValuePair("PrependTimestamp", CString(GetTimestampPrepend()));
     config.AddKeyValuePair("AuthOnlyViaModule", CString(AuthOnlyViaModule()));
+    config.AddKeyValuePair("ReplyViaNotice", CString(ReplyViaNotice()));
     config.AddKeyValuePair("Timezone", m_sTimezone);
     config.AddKeyValuePair("JoinTries", CString(m_uMaxJoinTries));
     config.AddKeyValuePair("MaxNetworks", CString(m_uMaxNetworks));
@@ -1400,6 +1401,7 @@ bool CUser::IsAdmin() const { return m_bAdmin; }
 bool CUser::DenySetBindHost() const { return m_bDenySetBindHost; }
 bool CUser::MultiClients() const { return m_bMultiClients; }
 bool CUser::AuthOnlyViaModule() const { return m_bAuthOnlyViaModule; }
+bool CUser::ReplyViaNotice() const { return m_bReplyViaNotice; }
 const CString& CUser::GetStatusPrefix() const { return m_sStatusPrefix; }
 const CString& CUser::GetDefaultChanModes() const {
     return m_sDefaultChanModes;
