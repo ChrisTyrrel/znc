@@ -806,6 +806,7 @@ bool CUser::Clone(const CUser& User, CString& sErrorRet, bool bCloneNetworks) {
     SetAdmin(User.IsAdmin());
     SetDenySetBindHost(User.DenySetBindHost());
     SetAuthOnlyViaModule(User.AuthOnlyViaModule());
+    SetReplyViaNotice(User.ReplyViaNotice());
     SetTimestampAppend(User.GetTimestampAppend());
     SetTimestampPrepend(User.GetTimestampPrepend());
     SetTimestampFormat(User.GetTimestampFormat());
